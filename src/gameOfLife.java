@@ -30,7 +30,7 @@ public class gameOfLife {
 
     public static void settings(String variant, Scanner entrada) {
 
-        System.out.println("Quina variant vols utilitzar?  (AA/B)");
+        System.out.println("¿Que variante quieres utilizar?  (Formato -> AA/B)");
         boolean work = false;
         while (work == false) {
             try {
@@ -47,10 +47,10 @@ public class gameOfLife {
                     }
                 }
             } catch (Exception e) {
-                System.out.println("No s'ha pogut realitzar l'operaci�, torna a introdu�r les dades.");
+                System.out.println("No se ha podido realizar la operación, vuelve a introducir los datos.");
             }
         }
-        System.out.println("Quina mida vols que tingui el mapa? (Files / Columnes)");
+        System.out.println("¿Que medida deseas que tenga el mapa? (Formato -> Filas / Columnas)");
         work = false;
         while (work == false) {
             try {
@@ -60,21 +60,21 @@ public class gameOfLife {
                 ncol = Integer.valueOf(midaA[1]) + 2;
                 work = true;
             } catch (Exception e) {
-                System.out.println("No s'ha pogut realitzar l'operaci�, torna a introdu�r les dades.");
+                System.out.println("No se ha podido realizar la operación, vuelve a introducir los datos.");
             }
         }
     }
 
     public static void mapsettings(Scanner entrada, char mapNow[][], int pob, int gen) {
 
-        System.out.println("De quina manera vols colocar les c�l�lules? (Manual / Autom�tic)");
+        System.out.println("¿De que manera quieres colocar las células?(Manual o Automático)");
         boolean work = false;
         while (work == false) {
             try {
                 String mode = entrada.nextLine().toLowerCase();
                 if (mode.equals("manual")) {
                     manual(entrada, mapNow, pob, gen);
-                } else if (mode.equals("autom�tic") | mode.equals("automatic")) {
+                } else if (mode.equals("automático") | mode.equals("automatico")) {
                     auto(entrada, mapNow, pob, gen);
                 } else {
                     work = true;
@@ -82,7 +82,7 @@ public class gameOfLife {
                 }
                 work = true;
             } catch (Exception e) {
-                System.out.println("No s'ha pogut realitzar l'operaci�, torna a introdu�r les dades.");
+                System.out.println("No se ha podido realizar la operación, vuelve a introducir los datos.");
             }
         }
 
@@ -92,8 +92,8 @@ public class gameOfLife {
 
         for (int fil = 0; fil < nfil; fil++) {
             for (int col = 0; col < ncol; col++) {
-                mapNow[fil][col] = '�';
-                newMap[fil][col] = '�';
+                mapNow[fil][col] = '·';
+                newMap[fil][col] = '·';
             }
         }
     }
@@ -109,7 +109,7 @@ public class gameOfLife {
             }
             System.out.println();
         }
-        System.out.println("Poblaci�n: " + pob + "    |    " + "Generaci�n: " + gen);
+        System.out.println("Población: " + pob + "    |    " + "Generación: " + gen);
     }
 
     public static char doa(char mapNow[][], int fil, int col) throws InterruptedException {
@@ -125,10 +125,10 @@ public class gameOfLife {
         if (mapNow[fil + 1][col + 1] == 'O') {alive++;}
         if (mapNow[fil][col] == 'O' && (alive == vid1 || alive == vid2)) {
             return 'O';
-        } else if (mapNow[fil][col] == '�' && (alive == res)) {
+        } else if (mapNow[fil][col] == '·' && (alive == res)) {
             return 'O';
         } else {
-            return '�';
+            return '·';
         }
     }
 
@@ -137,18 +137,21 @@ public class gameOfLife {
         for (int fil = 1; fil < nfil - 1; fil++) {
             for (int col = 1; col < ncol - 1; col++) {
                 mapNow[fil][col] = newMap[fil][col];
-                newMap[fil][col] = '�';
+                newMap[fil][col] = '·';
             }
         }
     }
 
     public static void manual(Scanner entrada, char mapNow[][], int pob, int gen) {
 
-        for (int cont = 0; cont < 5; cont++) {
+        System.out.println("¿Cuantas células quieres colocar?");
+        int nCel = entrada.nextInt();
+        entrada.nextLine();
+        for (int cont = 0; cont < nCel; cont++) {
             boolean work = false;
             while (work == false) {
                 try {
-                    System.out.println("On vols colocar la teva c�l�lula? (Fila / Columna)");
+                    System.out.println("¿Donde quieres colocar tu célula? (Formato -> Fila / Columna)");
                     String pos = entrada.nextLine();
                     String posA[] = pos.split("/");
                     int posf = Integer.valueOf(posA[0]);
@@ -158,13 +161,13 @@ public class gameOfLife {
                         print(mapNow, pob, gen);
                         work = true;
                     } else {
-                        System.out.println("No s'ha pogut realitzar l'operaci�, torna a introdu�r les dades.");
+                        System.out.println("No se ha podido realizar la operación, vuelve a introducir los datos.");
                         work = true;
                         cont--;
                     }
                     work = true;
                 } catch (Exception e) {
-                    System.out.println("No s'ha pogut realitzar l'operaci�, torna a introdu�r les dades.");
+                    System.out.println("No se ha podido realizar la operación, vuelve a introducir los datos.");
                 }
             }
         }
@@ -172,7 +175,7 @@ public class gameOfLife {
 
     public static void auto(Scanner entrada, char mapNow[][], int pob, int gen) {
 
-        System.out.println("Quants grups vols fer?");
+        System.out.println("¿Cuantos grupos quieres crear?");
         boolean work = false;
         while (work == false) {
             try {
@@ -193,7 +196,7 @@ public class gameOfLife {
                 }
                 work = true;
             } catch (Exception e) {
-                System.out.println("No s'ha pogut realitzar l'operaci�, torna a introdu�r les dades.");
+                System.out.println("No se ha podido realizar la operación, vuelve a introducir los datos.");
             }
         }
     }
